@@ -32,7 +32,8 @@
                         echo "<td class='px-6 py-4'>" . $product['category'] . "</td>";
                         echo "<td class='px-6 py-4'><img src='" . $product['image_URL'] . "' alt='" . $product['product_name'] . "' class='w-24 h-24 object-cover'></td>";
                         echo "<td class='px-6 py-4'>" . $product['created_at'] . "</td>";
-                        echo "<td class='px-6 py-4'> <a href='/uasweb?page=dashboard-edit-product&get=".$product['product_ID']."' class='rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Edit</a></td>";
+                        echo "<td class='px-6 py-4'> <a href='/uasweb?page=dashboard-edit-product&get=".$product['product_ID']."' class='m-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Edit</a>";
+                        echo "<a href='/uasweb?page=dashboard-delete-product&get=".$product['product_ID']."' class='rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Delete</a></td>";
                         echo "</tr>";
                     }
                 ?>

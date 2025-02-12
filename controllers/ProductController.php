@@ -49,7 +49,7 @@ class ProductController {
         $result = $this->productModel->insert($productName, $description, $price, $stock, $category, $image_URL);
 
         if ($result) {
-            echo "Produk berhasil ditambahkan!";
+            header('location: /uasweb/?page=dashboard-product');
         } else {
             echo "Terjadi kesalahan saat menambahkan produk!";
         }
@@ -64,8 +64,6 @@ class ProductController {
         $category = $data['category'];
         $image_URL = $data['image_URL'];
 
-        //var_dump($image_URL);
-
         $result = $this->productModel->update((int)$productId, $productName, $description, $price, $stock, $category, $image_URL);
 
         if ($result) {
@@ -75,14 +73,12 @@ class ProductController {
         }
     }
 
-    public function deleteProduct($data) {
-
-        $productId = $data['product_id'];
+    public function deleteProduct($productId) {
 
         $result = $this->productModel->delete($productId);
 
         if ($result) {
-            echo "Produk berhasil dihapus!";
+            header('location: /uasweb/?page=dashboard-product');
         } else {
             echo "Terjadi kesalahan saat menghapus produk!";
         }

@@ -43,17 +43,17 @@
                                     class="rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-gray-700 hover:text-white">Dashboard</a>
                             <a href="/uasweb?page=dashboard-product"
                                 class="rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-gray-700 hover:text-white">Products</a>
-                            <a href="/uasweb?page=order"
+                            <a href="/uasweb?page=dashboard-order"
                                 class="rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-gray-700 hover:text-white">Orders</a>
                         </div>
                     </div>
                 </div>
-               <?php
-                if(isset($_SESSION['user_id'])) {
+                <?php
+                if(isset($_SESSION['user'])) {
                 ?>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                        <h2><?php echo $_SESSION['user_id']; ?></h2>
+                        <h2><?php echo $_SESSION['user']['email']; ?></h2>
 
                         <div class="relative ml-3">
                             <div>
@@ -68,21 +68,39 @@
                                 </button>
                             </div>
 
-                            <div x-show="isOpen" x-transition:enter="transition ease-out duration-100 transform"
-                                x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                                x-transition:leave="transition ease-in duration-75 transform"
-                                x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-                                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
-                                role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                    id="user-menu-item-0">Your Profile</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                    id="user-menu-item-1">Settings</a>
-                                <form action="/uasweb/?page=logout" method="POST">
-                                    <button type="submit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                    id="user-menu-item-2">Sign out</button>
-                                </form>
-                            </div>
+                            <?php if($_SESSION['user']['role'] == "admin") { ?>
+                                <div x-show="isOpen" x-transition:enter="transition ease-out duration-100 transform"
+                                    x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75 transform"
+                                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                                    class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
+                                    role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                    <a href="/uasweb" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                        id="user-menu-item-0">Home</a>
+                                    <a href="/uasweb/?page=dashboard" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                        id="user-menu-item-1">Dashboard</a>
+                                    <form action="/uasweb/?page=logout" method="POST">
+                                        <button type="submit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                        id="user-menu-item-2">Sign out</button>
+                                    </form>
+                                </div>
+                            <?php }  else {?>
+                                <div x-show="isOpen" x-transition:enter="transition ease-out duration-100 transform"
+                                    x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75 transform"
+                                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                                    class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
+                                    role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                    <a href="/uasweb" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                        id="user-menu-item-0">Home</a>
+                                    <a href="/uasweb/?page=order" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                        id="user-menu-item-1">My Orders</a>
+                                    <form action="/uasweb/?page=logout" method="POST">
+                                        <button type="submit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                        id="user-menu-item-2">Sign out</button>
+                                    </form>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php

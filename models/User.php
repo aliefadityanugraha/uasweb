@@ -32,6 +32,19 @@ class User {
         return null;
     }
 
+    public function getById($id) {
+        $query = $this->db->prepare("SELECT * FROM users WHERE id = ?");
+
+        if ($query) {
+            $query->bind_param("s", $id);
+            $query->execute();
+            $result = $query->get_result();
+            return $result->fetch_assoc();
+        }
+
+        return null;
+    }
+
     public function insert($email, $password) {
 
         $username = "";

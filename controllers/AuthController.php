@@ -29,7 +29,7 @@ class AuthController {
         $result = $this->userModel->insert($email, $password);
 
         if($result) {
-            return header('location: /uasweb');
+            return header('location: /uasweb?page=login');
         } else {
             return "Terjadi Kesalahan Saat Registrasi";
         }
@@ -43,7 +43,7 @@ class AuthController {
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['email'];
+                $_SESSION['user'] = array("id" => $user['id'], "email" => $user['email'], "role" => $user['role']);
                 return header('location: /uasweb');
             } else {
                 echo "Password Salah, Mohon Coba Lagi";

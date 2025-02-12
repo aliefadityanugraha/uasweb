@@ -1,6 +1,6 @@
 <?php
 
-require_once './config/Database.php';
+require_once '../config/Database.php';
 
 class Order {
     private $db;
@@ -19,14 +19,14 @@ class Order {
         return [];
     }
 
-    public function getByUserId($userId) {
-        $query = $this->db->prepare("SELECT * FROM orders WHERE user_ID = ?");
+    public function getByOrderId($orderId) {
+        $query = $this->db->prepare("SELECT * FROM orders WHERE order_ID = ?");
 
         if ($query) {
-            $query->bind_param("i", $userId);
+            $query->bind_param("i", $orderId);
             $query->execute();
             $result = $query->get_result();
-            return $result->fetch_all();
+            return $result->fetch_assoc();
         }
 
         return null;
@@ -51,18 +51,6 @@ class Order {
             return $query->execute();
         }
 
-        return false;
-    }
-
-    public function updateAprovalStatus($orderId, $aproval) {
-
-        $query = $this->db->prepare("UPDATE orders SET status = ? WHERE order_ID = ?");
-    
-        if ($query) {
-            $query->bind_param("si",  $aproval, $orderId);
-            return $query->execute();
-        }
-    
         return false;
     }
 
